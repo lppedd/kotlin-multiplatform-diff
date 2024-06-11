@@ -65,27 +65,27 @@ public class MyersDiffWithLinearSpace<T>(
                     ++j
                 } else {
                     // TODO: compress these commands
+                    val size = data.script.size - 1
+
                     if (end1 - start1 > end2 - start2) {
                         if (data.script.isEmpty() ||
-                            data.script[data.script.size - 1].endOriginal != i ||
-                            data.script[data.script.size - 1].deltaType != DeltaType.DELETE
+                            data.script[size].endOriginal != i ||
+                            data.script[size].deltaType != DeltaType.DELETE
                         ) {
                             data.script.add(Change(DeltaType.DELETE, i, i + 1, j, j))
                         } else {
-                            data.script[data.script.size - 1] =
-                                data.script[data.script.size - 1].copy(endOriginal = i + 1)
+                            data.script[size] = data.script[size].copy(endOriginal = i + 1)
                         }
 
                         ++i
                     } else {
                         if (data.script.isEmpty() ||
-                            data.script[data.script.size - 1].endRevised != j ||
-                            data.script[data.script.size - 1].deltaType != DeltaType.INSERT
+                            data.script[size].endRevised != j ||
+                            data.script[size].deltaType != DeltaType.INSERT
                         ) {
                             data.script.add(Change(DeltaType.INSERT, i, i, j, j + 1))
                         } else {
-                            data.script[data.script.size - 1] =
-                                data.script[data.script.size - 1].copy(endRevised = j + 1)
+                            data.script[size] = data.script[size].copy(endRevised = j + 1)
                         }
 
                         ++j
