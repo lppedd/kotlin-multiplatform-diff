@@ -1,12 +1,8 @@
-@file:OptIn(ExperimentalKotlinGradlePluginApi::class)
-
 import io.github.petertrr.configurePublishing
 import io.github.petertrr.ext.booleanProperty
-import io.gitlab.arturbosch.detekt.Detekt
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
-import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.targets.js.testing.KotlinJsTest
 
 plugins {
@@ -105,9 +101,7 @@ detekt {
 }
 
 tasks {
-    withType<Detekt> {
-        named("check") {
-            dependsOn(this@withType)
-        }
+    check {
+        dependsOn(detekt)
     }
 }
